@@ -1,5 +1,6 @@
 #include "ffill.h"
-#define BEGIN 110 //can change
+//#define BEGIN 87 //can change
+#define BEGIN 107
 #define END 191 //can change
 
 using namespace cv;
@@ -42,7 +43,7 @@ int newMaskVal = 255;
 Point seedLeft;
 Point seedRight;
 static int seedCount = 0;
-int loDiff = 20, upDiff = 10; 
+int loDiff = 20, upDiff = 20; // upDiff = 10; 
 /* Regarding upDiff... 
  After certain stage where the region is big enough and 
  clearly distinguishable from surroundings,
@@ -97,7 +98,7 @@ static void colorFlood(Point seed){
         area = floodFill(dst, mask, seed, newVal, &ccomp, Scalar(lo, lo, lo),
                   Scalar(up, up, up), flags);
         
-        imshow( "mask", mask ); // shows mask geting updated.
+				imshow( "mask", mask ); // shows mask geting updated.
     }
     else
     {
@@ -236,8 +237,8 @@ int main( int argc, char** argv )
             nextpic = true;
             if(!prev.empty()){
               matched = ShapeMatching(prev, colored, image0);
-              imshow("matched", matched);
-            }
+							imshow("matched", matched);
+						}
             break;
         case 'r':
             cout << "Original image is restored\n";
@@ -269,7 +270,8 @@ int main( int argc, char** argv )
 
       if(nextpic){
         prev = image.clone();
-        mask = Scalar::all(0);             
+				if (!matched.empty()) prev = matched.clone();
+				mask = Scalar::all(0);             
         break;//break again from the outer loop and change the ct image.
       }
     }//end while
