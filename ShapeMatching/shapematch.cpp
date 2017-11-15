@@ -20,5 +20,7 @@ Mat ShapeMatching(Mat previous, Mat target, Mat original) {
       }
 		}
 
+  medianBlur(target, target, 3);
+
   return target;
 }
