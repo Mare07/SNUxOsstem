@@ -9,6 +9,8 @@ Mat ShapeMatching(Mat previous, Mat target, Mat original) {
 	Mat diffImage;
 	absdiff(previous, target, diffImage); // get difference
 
+	imshow("diff", diffImage);
+
 	Mat result = target.clone();
 
 	int i, j;
