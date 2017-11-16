@@ -60,17 +60,34 @@ void start_processing(GtkWidget *widget, gpointer data) {
 
 	int i;
 	for (i = 0; i < MAXNUM; i++) {
+		/*
 		int begin = seed_point[i].file;
 		if (begin < BEGIN) begin = BEGIN;
 		int end = END;
 		if (i != MAXNUM-1) end = seed_point[i+1].file-1;
+		*/
+		int begin, end;
+		if (i == 0) {
+			begin = seed_point[i].file;
+			end = seed_point[i+1].file;
+		} else if (i == MAXNUM-1) {
+			begin = seed_point[i].file;
+			end = seed_point[i-1].file;
+		} else {
+			begin = BEGIN;
+			end = END;
+		}
+		/*
 		if (begin >= end) {
 			g_print("[Fail] Please check the order of the images.\n");
 			return;
+		}*/
+
+		if (i != 1) {
+			Point tmp = floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
+			vol.x += tmp.x;
+			vol.y += tmp.y;
 		}
-		Point tmp = floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
-		vol.x += tmp.x;
-		vol.y += tmp.y;
 	}
 
 	g_print("[Success] Please check results directory.\n");

@@ -109,6 +109,12 @@ Point floodfill(Point left, Point right, string filedir, int begin, int end)
     string filename;
     bool wannaExit = false;
 
+		if (begin > end) {
+			int tmp = begin;
+			begin = end;
+			end = tmp;
+		}
+
     for(ctnum = begin; ctnum < end; ctnum++){
       // Iterate CT images
 
