@@ -12,6 +12,11 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/core.hpp"
 
+#include "itkImage.h"
+#include "itkImageSeriesReader.h"
+#include "itkImageFileWriter.h"
+#include "itkNumericSeriesFileNames.h"
+
 #include "ffill.h"
 
 using namespace cv;

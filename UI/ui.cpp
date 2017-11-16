@@ -20,6 +20,48 @@ static int point_cnt = 0;
 static bool success = false;
 static Point vol; // vol.x = left, vol.y = right
 
+void make_mha() {
+	typedef unsigned char PixelType;
+  const unsigned int Dimension = 3;
+
+  typedef itk::Image< PixelType, Dimension > ImageType;
+	typedef itk::ImageSeriesReader< ImageType > ReaderType;
+	typedef itk::ImageFileWriter< ImageType > WriterType;
+
+	ReaderType::Pointer reader = ReaderType::New();
+	WriterType::Pointer writer = WriterType::New();
+
+	const unsigned int first = BEGIN;
+	const unsigned int last = END;
+
+	const char *path = "./results/ct.res.%d.jpg";
+	const char *outputFilename = "result.mha";
+
+	typedef itk::NumericSeriesFileNames NameGeneratorType;
+
+	NameGeneratorType::Pointer nameGenerator = NameGeneratorType::New();
+
+	nameGenerator->SetSeriesFormat(path);
+	nameGenerator->SetStartIndex(first);
+	nameGenerator->SetEndIndex(last);
+	nameGenerator->SetIncrementIndex(1);
+	std::vector<std::string> names = nameGenerator->GetFileNames();
+
+	reader->SetFileNames(names);
+	writer->SetFileName(outputFilename);
+	writer->SetInput(reader->GetOutput());
+
+	try {
+		writer->Update();
+		g_print("[Success] Please check result.mha.\n");
+	} catch (itk::ExceptionObject & err) {
+		std::cerr << "error" << std::endl;
+		std::cerr << err << std::endl;
+		return;
+	}
+	return;
+}
+
 void destroy_widget(GtkWidget *widget, gpointer data) {
 	gtk_widget_destroy(widget);
 }
@@ -92,6 +134,7 @@ void start_processing(GtkWidget *widget, gpointer data) {
 
 	g_print("[Success] Please check results directory.\n");
 	success = true;
+	make_mha();
 	//gtk_widget_destroy(widget);
 	return;
 }
