@@ -16,7 +16,9 @@ using namespace cv;
 struct SeedPoint {
 	int image;
 	int file;
-	Point point;
+	Point left;
+	Point right;
+	bool ok;
 } seed_point[MAXNUM];
 
 static char* directory = NULL;
@@ -29,8 +31,12 @@ void destroy_widget(GtkWidget *widget, gpointer data) {
 }
 
 void start_processing(GtkWidget *widget, gpointer data) {
+	if (image_cnt != MAXNUM) {
+		g_print("Please open images. (REQUIRE %d)\n", MAXNUM);
+		return;
+	}
 	if (point_cnt != MAXNUM) {
-		g_print("Please input seed points. (REQUIRE %d)\n", MAXNUM);
+		g_print("Please input seed points. (REQUIRE 2 * %d)\n", MAXNUM);
 		return;
 	}
 	if (directory == NULL) {
@@ -43,16 +49,32 @@ void get_seed_point(GtkWidget *widget, GdkEventButton *event, gpointer data) {
 	const gchar *label_txt = gtk_label_get_text(GTK_LABEL((GtkWidget *)data));
 	int image_num;
 	sscanf(label_txt, "%*s %d", &image_num);
+	
+	bool ok = seed_point[image_num-1].ok;
+	int width = gtk_widget_get_allocated_width(widget);
+
+	if (event->x <= width / 2) {
+		// left
+		seed_point[image_num-1].left.x = event->x;
+		seed_point[image_num-1].left.y = event->y;
+	} else {
+		// right
+		seed_point[image_num-1].right.x = event->x;
+		seed_point[image_num-1].right.y = event->y;
+	}
+
+	if ((seed_point[image_num-1].left.x >= 0) && (seed_point[image_num-1].right.x >= 0)) {
+		if (!ok) {
+			seed_point[image_num-1].ok = true;
+			point_cnt++;
+		}
+	}
 
 	char str[MAXCHAR];
-	sprintf(str, "[Image %d] x:%.2f, y:%.2f", image_num, event->x, event->y);
+	sprintf(str, "[Image %d] left: (%d, %d) right: (%d, %d)",
+			image_num, seed_point[image_num-1].left.x, seed_point[image_num-1].left.y,
+			seed_point[image_num-1].right.x, seed_point[image_num-1].right.y);
 	gtk_label_set_text(GTK_LABEL((GtkWidget *)data), str);
-
-	if (seed_point[image_num-1].point.x == -1) {
-		point_cnt++;
-	}
-	seed_point[image_num-1].point.x = event->x;
-	seed_point[image_num-1].point.y = event->y;
 }
 
 void open_image(GtkWidget *widget, gpointer data) {
@@ -124,7 +146,9 @@ void open_image(GtkWidget *widget, gpointer data) {
 		
 		seed_point[image_cnt-1].image = image_cnt;
 		seed_point[image_cnt-1].file  = file_num;
-		seed_point[image_cnt-1].point = Point(-1, -1);
+		seed_point[image_cnt-1].left = Point(-1, -1);
+		seed_point[image_cnt-1].right = Point(-1, -1);
+		seed_point[image_cnt-1].ok = false;
 
 		/* show */
 		gtk_widget_show_all(window);
