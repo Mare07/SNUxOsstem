@@ -169,13 +169,31 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
        	imshow("filled_mask", filled_mask);
 	   	}
 
-	     if(nextpic){
-   		 		prev = image.clone();
-					if (!matched.empty()){
-        		prev = matched.clone();
-      		}
-					mask = Scalar::all(0);             
+	    if(nextpic){
+   			prev = image.clone();
+				if (!matched.empty()){
+       		prev = matched.clone();
       	}
+				mask = Scalar::all(0);             
+      }
+
+			// make directory
+			int err = mkdir("./results", S_IRUSR | S_IWUSR | S_IXUSR);
+			if ((err == -1) && (errno != EEXIST)) {
+				cout << "directory create error" << endl;
+				return;
+			}
+
+			// save image
+			ostringstream con_ctnum;
+			con_ctnum << ctnum;
+			string result_dir = "./results/ct.res." + con_ctnum.str() + ".jpg";
+
+			if (!matched.empty()) {
+				imwrite(result_dir, matched);
+			} else {
+				imwrite(result_dir, image);
+			}
     }//end for
     
 		return;
