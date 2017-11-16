@@ -9,6 +9,6 @@
 
 using namespace cv;
 
-Mat ShapeMatching(Mat, Mat, Mat);
+Mat ShapeMatching(Mat, Mat, Mat, int*, int*);
 
 #endif

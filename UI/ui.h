@@ -21,6 +21,6 @@ using namespace std;
 #define MAXNUM  3
 
 #define BEGIN 87
-#define END 190
+#define END 185
 
 #endif

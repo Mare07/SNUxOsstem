@@ -17,8 +17,22 @@ static char* directory = NULL;
 static int image_cnt = 0;
 static int point_cnt = 0;
 
+static bool success = false;
+static Point vol; // vol.x = left, vol.y = right
+
 void destroy_widget(GtkWidget *widget, gpointer data) {
 	gtk_widget_destroy(widget);
+}
+
+void show_vol_loc(GtkWidget *widget, gpointer data) {
+	if (!success) {
+		g_print("Please start processing\n");
+		return;
+	}
+
+	char str[MAXCHAR];
+	sprintf(str, "[Volume]\nleft: %d\nright: %d", vol.x, vol.y);
+	gtk_label_set_text(GTK_LABEL((GtkWidget *)data), str);
 }
 
 void start_processing(GtkWidget *widget, gpointer data) {
@@ -41,6 +55,9 @@ void start_processing(GtkWidget *widget, gpointer data) {
 	string dir = directory;
 	dir += '/';
 
+	vol.x = 0;
+	vol.y = 0;
+
 	int i;
 	for (i = 0; i < MAXNUM; i++) {
 		int begin = seed_point[i].file;
@@ -51,10 +68,13 @@ void start_processing(GtkWidget *widget, gpointer data) {
 			g_print("[Fail] Please check the order of the images.\n");
 			return;
 		}
-		floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
+		Point tmp = floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
+		vol.x += tmp.x;
+		vol.y += tmp.y;
 	}
 
 	g_print("[Success] Please check results directory.\n");
+	success = true;
 	//gtk_widget_destroy(widget);
 	return;
 }
@@ -198,7 +218,9 @@ int main(int argc, char *argv[]) {
 	GtkWidget *button1;
 	GtkWidget *button2;
 	GtkWidget *button3;
-	GtkWidget *label;
+	GtkWidget *button4;
+	GtkWidget *label1;
+	GtkWidget *label2;
 
 	gtk_init(&argc, &argv);
 
@@ -219,13 +241,13 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(button1, "clicked", G_CALLBACK(open_image), window);
 	gtk_box_pack_start(GTK_BOX(box), button1, FALSE, FALSE, 0);
 	
-	/* label */
-  	label = gtk_label_new("Directory: ...");
- 	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
+	/* label1 */
+  label1 = gtk_label_new("Directory: ...");
+ 	gtk_box_pack_start(GTK_BOX(box), label1, FALSE, FALSE, 0);
 
 	/* button2 */
 	button2 = gtk_button_new_with_label("Select Directory");
-	g_signal_connect(button2, "clicked", G_CALLBACK(select_directory), label);
+	g_signal_connect(button2, "clicked", G_CALLBACK(select_directory), label1);
 	gtk_box_pack_start(GTK_BOX(box), button2, FALSE, FALSE, 0);
 	
 	/* button3 */
@@ -233,6 +255,15 @@ int main(int argc, char *argv[]) {
 	g_signal_connect(button3, "clicked", G_CALLBACK(start_processing), window);
 	gtk_box_pack_start(GTK_BOX(box), button3, FALSE, FALSE, 0);
 		
+	/* label2 */
+	label2 = gtk_label_new("[Volume]\nleft: ...\nright: ...");
+	gtk_box_pack_start(GTK_BOX(box), label2, FALSE, FALSE, 0);
+
+	/* button4 */
+	button4 = gtk_button_new_with_label("Show volume");
+	g_signal_connect(button4, "clicked", G_CALLBACK(show_vol_loc), label2);
+	gtk_box_pack_start(GTK_BOX(box), button4, FALSE, FALSE, 0);
+	
 	/* show */
 	gtk_widget_show_all(window);
 	gtk_main();

@@ -29,7 +29,10 @@ int loDiff = 20, upDiff = 20; // upDiff = 10;
 
 Scalar blue(255, 255, 255);
 
-static void colorFlood(Point seed){
+int left_vol = 0;
+int right_vol = 0;
+
+static int colorFlood(Point seed){
     int lo = ffillMode == 0 ? 0 : loDiff;
     int up = ffillMode == 0 ? 0 : upDiff;
     int flags = connectivity + (newMaskVal << 8) +
@@ -52,8 +55,9 @@ static void colorFlood(Point seed){
 
     if( useMask )
     {
-        threshold(mask, mask, 1, 255, THRESH_BINARY); 
-        // 3rd arg was originally 128
+        //threshold(mask, mask, 1, 255, THRESH_BINARY); 
+        threshold(mask, mask, 40, 255, 3);
+				// 3rd arg was originally 128
         area = floodFill(dst, mask, seed, newVal, &ccomp, Scalar(lo, lo, lo),
                   Scalar(up, up, up), flags);
         
@@ -67,6 +71,8 @@ static void colorFlood(Point seed){
     dst.copyTo(colored);
     
 		cout << area << " pixels were repainted\n";
+
+		return area;
 }
 
 static Mat fillHoles(Mat holey){
@@ -93,8 +99,9 @@ static Mat fillHoles(Mat holey){
   return filled;
 }
 
-void floodfill(Point left, Point right, string filedir, int begin, int end)
+Point floodfill(Point left, Point right, string filedir, int begin, int end)
 {
+		Point vol = Point(0, 0);
 		seedLeft = left;
 		seedRight = right;
     int ctnum;
@@ -117,7 +124,7 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
     	if( image0.empty() )
     	{
       	  cout << "Image empty\n";
-        	return;
+        	return Point(-1, -1);
     	}
  
     	image0.copyTo(image); 
@@ -125,16 +132,18 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
     	cvtColor(image0, gray, COLOR_BGR2GRAY);
     	mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
     
-     	colorFlood(seedLeft);
-      colorFlood(seedRight);
+     	left_vol += colorFlood(seedLeft);
+      right_vol += colorFlood(seedRight);
 
 			nextpic = true;
       if (!prev.empty()){
       	if (useMask){
        		// ?      
 				}
-       	matched = ShapeMatching(prev, colored, image0);
-
+				int left_minus, right_minus;
+       	matched = ShapeMatching(prev, colored, image0, &left_minus, &right_minus);
+				left_vol -= left_minus;
+				right_vol -= right_minus;
        	inRange(matched, blue, blue, matched_mask);
        	filled_mask = fillHoles(matched_mask);
 	   	}
@@ -149,10 +158,10 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
 
 			// make directory
                         // was ./results
-			int err = mkdir("./what", S_IRUSR | S_IWUSR | S_IXUSR);
+			int err = mkdir("./results", S_IRUSR | S_IWUSR | S_IXUSR);
 			if ((err == -1) && (errno != EEXIST)) {
 				cout << "directory create error" << endl;
-				return;
+				return Point(-1, -1);
 			}
 
 			// save image
@@ -167,5 +176,7 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
 			}
     }//end for
     
-		return;
+		vol.x = left_vol;
+		vol.y = right_vol;
+		return vol;
 }

@@ -24,8 +24,8 @@ using namespace std;
 //static void help();
 //static void metahelp();
 //static void onMouse(int, int, int, int, void*);
-static void colorFlood(Point);
+static int colorFlood(Point);
 static Mat fillHoles(Mat);
-void floodfill(Point, Point, string, int, int);
+Point floodfill(Point, Point, string, int, int);
 
 #endif
