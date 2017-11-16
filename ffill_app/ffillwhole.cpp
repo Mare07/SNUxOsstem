@@ -1,7 +1,10 @@
 #include "ffill.h"
 //#define BEGIN 87 //can change
-#define BEGIN 107
-#define END 191 //can change
+//#define END 99
+#define BEGIN 100
+#define END 107
+//#define BEGIN 108
+//#define END 191 //can change
 
 using namespace cv;
 using namespace std;
@@ -69,6 +72,8 @@ static void onMouse( int event, int x, int y, int flags, void* param)
       seedRight = seed;
       colorFlood(seedRight);
     }
+
+		cout << seed.x << " " << seed.y << endl;
 
     //cout << "Seed Count: " << seedCount << endl;
 }
