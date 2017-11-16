@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/VolumeFromSlices.cxx" "/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/build/CMakeFiles/VolumeFromSlices.dir/VolumeFromSlices.cxx.o"
+  "/home/hyewon/SNUxOsstem/3dconstruction/VolumeFromSlices/VolumeFromSlices.cxx" "/home/hyewon/SNUxOsstem/3dconstruction/VolumeFromSlices/build/CMakeFiles/VolumeFromSlices.dir/VolumeFromSlices.cxx.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,31 +15,9 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "ITKIOFactoryRegistration"
-  "/usr/include/hdf5/serial"
-  "/usr/include/dcmtk/dcmseg"
-  "/usr/include/dcmtk/dcmfg"
-  "/usr/include/dcmtk/dcmiod"
-  "/usr/include/dcmtk/dcmrt"
-  "/usr/include/dcmtk/dcmpstat"
-  "/usr/include/dcmtk/dcmqrdb"
-  "/usr/include/dcmtk/dcmwlm"
-  "/usr/include/dcmtk/dcmsign"
-  "/usr/include/dcmtk/dcmsr"
-  "/usr/include/dcmtk/dcmnet"
-  "/usr/include/dcmtk/dcmtls"
-  "/usr/include/dcmtk/dcmjpls"
-  "/usr/include/dcmtk/dcmjpeg"
-  "/usr/include/dcmtk/dcmimage"
-  "/usr/include/dcmtk/dcmimgle"
-  "/usr/include/dcmtk/dcmdata"
-  "/usr/include/dcmtk/oflog"
-  "/usr/include/dcmtk/ofstd"
-  "/usr/include/dcmtk/config"
-  "/usr/include/x86_64-linux-gnu"
-  "/usr/include/gdcm-2.6"
-  "/usr/include/double-conversion"
-  "/usr/include/ITK-4.9"
+  "ITKFactoryRegistration"
+  "/usr/local/include/ITK-4.13"
+  "/usr/local/include"
   )
 
 # Targets to which this target links.
