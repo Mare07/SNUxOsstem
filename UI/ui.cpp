@@ -85,7 +85,7 @@ void show_vol_loc(GtkWidget *widget, gpointer data) {
 	gtk_label_set_text(GTK_LABEL((GtkWidget *)data), str);
 
 	const gchar *btn = gtk_button_get_label(GTK_BUTTON(widget));
-	
+/*	
 	pid_t pid = fork();
 	if (pid == 0) {
 		if (btn[2] == '1') {
@@ -94,6 +94,7 @@ void show_vol_loc(GtkWidget *widget, gpointer data) {
 			execl( "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result1.mha", (const char *) 0);
 		}
 	}
+	*/
 }
 
 void start_processing(GtkWidget *widget, gpointer data) {
