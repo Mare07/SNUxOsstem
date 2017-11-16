@@ -25,7 +25,9 @@ using namespace std;
 #define MAXCHAR 256
 #define MAXNUM  3
 
-#define BEGIN 87
-#define END 185
+#define BEGIN 90
+#define MID1  99
+#define MID2  109
+#define END   185
 
 #endif
