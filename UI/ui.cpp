@@ -31,8 +31,12 @@ void destroy_widget(GtkWidget *widget, gpointer data) {
 }
 
 void start_processing(GtkWidget *widget, gpointer data) {
+	if (image_cnt != MAXNUM) {
+		g_print("Please open images. (REQUIRE %d)\n", MAXNUM);
+		return;
+	}
 	if (point_cnt != MAXNUM) {
-		g_print("Please input seed points. (REQUIRE %d)\n", MAXNUM);
+		g_print("Please input seed points. (REQUIRE 2 * %d)\n", MAXNUM);
 		return;
 	}
 	if (directory == NULL) {
