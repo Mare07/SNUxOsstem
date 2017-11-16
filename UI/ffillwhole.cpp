@@ -164,7 +164,12 @@ Point floodfill(Point left, Point right, string filedir, int begin, int end)
 
 			// make directory
                         // was ./results
-			int err = mkdir("./results", S_IRUSR | S_IWUSR | S_IXUSR);
+			int err = mkdir("./results0", S_IRUSR | S_IWUSR | S_IXUSR);
+			if ((err == -1) && (errno != EEXIST)) {
+				cout << "directory create error" << endl;
+				return Point(-1, -1);
+			}
+			err = mkdir("./results1", S_IRUSR | S_IWUSR | S_IXUSR);
 			if ((err == -1) && (errno != EEXIST)) {
 				cout << "directory create error" << endl;
 				return Point(-1, -1);
@@ -173,12 +178,19 @@ Point floodfill(Point left, Point right, string filedir, int begin, int end)
 			// save image
 			ostringstream con_ctnum;
 			con_ctnum << ctnum;
-			string result_dir = "./results/ct.res." + con_ctnum.str() + ".jpg";
+			string result_dir1 = "./results0/ct.res." + con_ctnum.str() + ".jpg";
+			string result_dir2 = "./results1/ct.res." + con_ctnum.str() + ".jpg";
 
 			if (!matched.empty()) {
-				imwrite(result_dir, matched);
+				imwrite(result_dir1, matched);
+
+				Mat sub = matched - image0;
+				imwrite(result_dir2, sub);
 			} else {
-				imwrite(result_dir, image);
+				imwrite(result_dir1, image);
+
+				Mat sub = image - image0;
+				imwrite(result_dir2, sub);
 			}
     }//end for
     

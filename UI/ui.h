@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgcodecs.hpp"
@@ -25,7 +28,9 @@ using namespace std;
 #define MAXCHAR 256
 #define MAXNUM  3
 
-#define BEGIN 87
-#define END 185
+#define BEGIN 90
+#define MID1  99
+#define MID2  109
+#define END   185
 
 #endif
