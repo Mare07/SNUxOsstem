@@ -1,45 +1,14 @@
 #include "ffill.h"
-//#define BEGIN 87 //can change
-//#define END 99
-#define BEGIN 100
-#define END 191
-//#define BEGIN 108
 #define SIZE 20
-
 
 using namespace cv;
 using namespace std;
-
-static void metahelp(){
-  cout << "Press key \"h\" in order to see instructions." << endl;
-}
-
-static void help()
-{
-    cout << "\nThis program demonstrated the floodFill() function\n"
-            "Call:\n"
-            "./ffilldemo [image_name -- Default: ../data/fruits.jpg]\n" << endl;
-
-    cout << "Hot keys: \n"
-            "\tESC - quit the program\n"
-            "\tc - switch color/grayscale mode\n"
-            "\tm - switch mask mode\n"
-            "\tn - move on to next image\n"
-            "\tr - restore the original image\n"
-            "\ts - use null-range floodfill\n"
-            "\tf - use gradient floodfill with fixed(absolute) range\n"
-            "\tg - use gradient floodfill with floating(relative) range\n"
-            "\t4 - use 4-connectivity mode\n"
-            "\t8 - use 8-connectivity mode\n" << endl;
-}
 
 Mat prev, image0, image, gray, mask, colored, matched;
 // Mat image0: each original ct image
 // Mat colored: floodfilled image1
 // Shape Matching uses Mat prev & matched & colored & image0.
 Mat matched_mask, filled_mask;
-
-
 
 int ffillMode = 1;
 int connectivity = 4;
@@ -60,28 +29,6 @@ int loDiff = 20, upDiff = 20; // upDiff = 10;
 
 Scalar blue(255, 0, 0);
 
-
-
-static void onMouse( int event, int x, int y, int flags, void* param)
-{
-    if( event != EVENT_LBUTTONDOWN )
-        return;
-    seedCount += 1;
-    Point seed = Point(x,y);
-    if(seedCount == 1){
-      seedLeft = seed;
-      colorFlood(seedLeft);
-    }
-    else if(seedCount == 2){
-      seedRight = seed;
-      colorFlood(seedRight);
-    }
-
-		cout << seed.x << " " << seed.y << endl;
-
-    //cout << "Seed Count: " << seedCount << endl;
-}
-
 static void colorFlood(Point seed){
     int lo = ffillMode == 0 ? 0 : loDiff;
     int up = ffillMode == 0 ? 0 : upDiff;
@@ -93,7 +40,6 @@ static void colorFlood(Point seed){
     int g = 0;
     int r = 0; 
 
-
     Rect ccomp; 
     //new region was colored light gray : Scalar(r*0.299 + g*0.587 + b*0.114)
 
@@ -101,7 +47,6 @@ static void colorFlood(Point seed){
     Mat dst = isColor ? image : gray;
     
     matched_mask = Scalar::all(0);
-
 
     int area; // # of pixels repainted?
 
@@ -123,17 +68,12 @@ static void colorFlood(Point seed){
     
     dst.copyTo(colored);
 
-
-        
     imshow("current", colored);
-    
-
     cout << area << " pixels were repainted\n";
 }
 
 Mat fillHoles(Mat holey){
   Mat filled = holey.clone();
-
 
   // CONTOUR ??
   vector<vector<Point> > contours; 
@@ -144,7 +84,6 @@ Mat fillHoles(Mat holey){
   for(int i = 0; i<contours.size();i++){
     drawContours(filled, contours, i, blue, 4, 8, hierarchy, 2);
   }
-
 
   // MORPHOLOGY - CLOSE
   Mat elem;
@@ -158,27 +97,17 @@ Mat fillHoles(Mat holey){
 }
 
 
-int main( int argc, char** argv )
+//int main( int argc, char** argv )
+void floodfill(Point left, Point right, string filedir, int begin, int end)
 {
-    cv::CommandLineParser parser (argc, argv,
-        "{help h | | show help message}{@image|../data/fruits.jpg| input image}"
-    );
-    // left: argv / middle: default value / right: description (?) 
-    
-    
-    if (parser.has("help"))
-    {
-        parser.printMessage();
-        return 0;
-    }
-    string filedir = parser.get<string>("@image");
+		seedLeft = left;
+		seedRight = right;
     int ctnum;
     ostringstream ss;
     string filename;
     bool wannaExit = false;
-    
 
-    for(ctnum = BEGIN; ctnum < END; ctnum++){
+    for(ctnum = begin; ctnum < end; ctnum++){
       // Iterate CT images
 
       bool nextpic = false;
@@ -190,151 +119,78 @@ int main( int argc, char** argv )
     
       image0 = imread(filename, 1);
 
-    if( image0.empty() )
-    {
-        cout << "Image empty\n";
-        parser.printMessage();
-        return 0;
-    }
+    	if( image0.empty() )
+    	{
+      	  cout << "Image empty\n";
+        	return;
+    	}
+ 
+    	image0.copyTo(image); 
 
-    metahelp();
+    	cvtColor(image0, gray, COLOR_BGR2GRAY);
+    	mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
     
-    image0.copyTo(image); 
+    	namedWindow( "current", 0 );
+    	createTrackbar( "lo_diff", "current", &loDiff, 255, 0 );
+    	createTrackbar( "up_diff", "current", &upDiff, 255, 0 );
+    
+    	if(prev.empty()){
+      	namedWindow("prev", 0);
+    	}
+    	else{
+       	imshow("prev", prev);
+    	}
+    
+    	namedWindow("matched", 0);
+    	namedWindow("matched_mask", 0);    
+    	namedWindow("filled_mask", 0);
 
-    cvtColor(image0, gray, COLOR_BGR2GRAY);
-    mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
-    
-    namedWindow( "current", 0 );
-    createTrackbar( "lo_diff", "current", &loDiff, 255, 0 );
-    createTrackbar( "up_diff", "current", &upDiff, 255, 0 );
-
-    // Only receive two clicks from the user
-    if(ctnum < BEGIN+2){      
-      setMouseCallback("current", onMouse, 0);
-    }
-    
-    if(prev.empty()){
-       namedWindow("prev", 0);
-    }
-    else{
-       imshow("prev", prev);
-    }
-    
-    namedWindow("matched", 0);
-    namedWindow("matched_mask", 0);    
-    namedWindow("filled_mask", 0);
-
-    if(seedCount > 1){
-          colorFlood(seedLeft);
-          colorFlood(seedRight);
-    }
+     	colorFlood(seedLeft);
+      colorFlood(seedRight);
    
-    while(1)
-    {
-        imshow("current", isColor ? image : gray);
+      imshow("current", isColor ? image : gray);
         
-       
+			// debug
+			while (1) {
+				char c = (char)waitKey(0);
+				if (c == 'n') break;
+   		}
+			// gubed
 
-        char c = (char)waitKey(0);
-        if( c == 27 )//esc key
-        {
-            wannaExit = true;
-            cout << "Exiting ...\n";
-            break;
-        }
-        switch( c )
-        {
-        case 'c':
-            if( isColor )
-            {
-                cout << "Grayscale mode is set\n";
-                cvtColor(image0, gray, COLOR_BGR2GRAY);
-                mask = Scalar::all(0);
-                isColor = false;
-            }
-            else
-            {
-                cout << "Color mode is set\n";
-                image0.copyTo(image);
-                mask = Scalar::all(0);
-                isColor = true;
-            }
-            break;
-        case 'h':
-            help();
-            break;
-        case 'm':
-            if( useMask )
-            {
-                destroyWindow( "mask" );
-                useMask = false;
-            }
-            else
-            {
-                namedWindow( "mask", 0 );
-                mask = Scalar::all(0); // background black
-                imshow("mask", mask);
-                useMask = true;
-            }
-            break;
-        case 'n': //added
-            nextpic = true;
-            if(!prev.empty()){
-              if(useMask){
+			nextpic = true;
+      if (!prev.empty()){
+      	if (useMask){
+       		// ?      
+				}
+       	matched = ShapeMatching(prev, colored, image0);
+	     	imshow("matched", matched);
 
-              }
-              matched = ShapeMatching(prev, colored, image0);
-	      imshow("matched", matched);
+       	inRange(matched, blue, blue, matched_mask);
+       	filled_mask = fillHoles(matched_mask);
+       	imshow("matched_mask", matched_mask);
+       	imshow("filled_mask", filled_mask);
+	   	}
 
-
-              inRange(matched, blue, blue, matched_mask);
-              filled_mask = fillHoles(matched_mask);
-              imshow("matched_mask", matched_mask);
-              imshow("filled_mask", filled_mask);
-	    }
-            break;
-        case 'r':
-            cout << "Original image is restored\n";
-            image0.copyTo(image);
-            cvtColor(image, gray, COLOR_BGR2GRAY);
-            mask = Scalar::all(0);
-            break;
-        case 's':
-            cout << "Simple floodfill mode is set\n";
-            ffillMode = 0;
-            break;
-        case 'f':
-            cout << "Fixed Range floodfill mode is set\n";
-            ffillMode = 1;
-            break;
-        case 'g':
-            cout << "Gradient (floating range) floodfill mode is set\n";
-            ffillMode = 2;
-            break;
-        case '4':
-            cout << "4-connectivity mode is set\n";
-            connectivity = 4;
-            break;
-        case '8':
-            cout << "8-connectivity mode is set\n";
-            connectivity = 8;
-            break;
-        }
-
-      if(nextpic){
-        prev = image.clone();
-	if (!matched.empty()){
-          prev = matched.clone();
-        }
-	mask = Scalar::all(0);             
-        break;//break again from the outer loop and change the ct image.
-      }
-    }//end while
-
-
-  if(wannaExit){
-    return 0; //exit now.
-  }
+	     if(nextpic){
+   		 		prev = image.clone();
+					if (!matched.empty()){
+        		prev = matched.clone();
+      		}
+					mask = Scalar::all(0);             
+      	}
+    }//end for
+    
+		return;
 }
-    return 0;
+
+int main() {
+	Point left = Point(133, 131);
+	Point right = Point(250, 121);
+	string filedir = "/home/hyewon/share/ct_coronal/";
+	int begin = 109;
+	int end = 120;
+
+	floodfill(left, right, filedir, begin, end);
+
+	return 0;
 }
