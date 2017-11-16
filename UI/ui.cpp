@@ -1,17 +1,8 @@
-#include <gtk/gtk.h>
-#include <stdio.h>
-#include <string.h>
+/*
+ * ui.cpp
+ */
 
-#include "opencv2/imgproc.hpp"
-#include "opencv2/imgcodecs.hpp"
-#include "opencv2/videoio.hpp"
-#include "opencv2/highgui.hpp"
-#include "opencv2/core.hpp"
-
-using namespace cv;
-
-#define MAXCHAR 256
-#define MAXNUM  3
+#include "ui.h"
 
 struct SeedPoint {
 	int image;
@@ -43,6 +34,24 @@ void start_processing(GtkWidget *widget, gpointer data) {
 		g_print("Please select directory.\n");
 		return;
 	}
+
+	// start processing
+	
+	// add '/' at the end of directory
+	string dir = directory;
+	dir += '/';
+
+	int i;
+	for (i = 0; i < MAXNUM; i++) {
+		int begin = seed_point[i].file;
+		int end = END;
+		if (i != MAXNUM-1) end = seed_point[i+1].file-1;
+		floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
+	}
+
+	g_print("[Success] Please check results directory.\n");
+	gtk_widget_destroy(widget);
+	return;
 }
 
 void get_seed_point(GtkWidget *widget, GdkEventButton *event, gpointer data) {
