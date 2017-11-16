@@ -1,8 +1,8 @@
-#include "ffill.h"
-#define SIZE 20
+/*
+ * ffillwhole.cpp
+ */
 
-using namespace cv;
-using namespace std;
+#include "ffill.h"
 
 Mat prev, image0, image, gray, mask, colored, matched;
 // Mat image0: each original ct image
@@ -72,7 +72,7 @@ static void colorFlood(Point seed){
     cout << area << " pixels were repainted\n";
 }
 
-Mat fillHoles(Mat holey){
+static Mat fillHoles(Mat holey){
   Mat filled = holey.clone();
 
   // CONTOUR ??
@@ -96,8 +96,6 @@ Mat fillHoles(Mat holey){
   return filled;
 }
 
-
-//int main( int argc, char** argv )
 void floodfill(Point left, Point right, string filedir, int begin, int end)
 {
 		seedLeft = left;
@@ -181,16 +179,4 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
     }//end for
     
 		return;
-}
-
-int main() {
-	Point left = Point(133, 131);
-	Point right = Point(250, 121);
-	string filedir = "/home/hyewon/share/ct_coronal/";
-	int begin = 109;
-	int end = 120;
-
-	floodfill(left, right, filedir, begin, end);
-
-	return 0;
 }
