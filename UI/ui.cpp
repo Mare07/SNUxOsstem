@@ -44,13 +44,18 @@ void start_processing(GtkWidget *widget, gpointer data) {
 	int i;
 	for (i = 0; i < MAXNUM; i++) {
 		int begin = seed_point[i].file;
+		if (begin < BEGIN) begin = BEGIN;
 		int end = END;
 		if (i != MAXNUM-1) end = seed_point[i+1].file-1;
+		if (begin >= end) {
+			g_print("[Fail] Please check the order of the images.\n");
+			return;
+		}
 		floodfill(seed_point[i].left, seed_point[i].right, dir, begin, end);
 	}
 
 	g_print("[Success] Please check results directory.\n");
-	gtk_widget_destroy(widget);
+	//gtk_widget_destroy(widget);
 	return;
 }
 
