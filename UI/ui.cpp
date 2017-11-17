@@ -167,8 +167,8 @@ void start_processing(GtkWidget *widget, gpointer data) {
 	success = true;
 
 	// make mha file
-	const char *path1   = "./results0/ct.res.%d.jpg";
-	const char *path2   = "./results1/ct.res.%d.jpg";
+	const char *path1   = "./results00/ct.res.%d.jpg";
+	const char *path2   = "./results11/ct.res.%d.jpg";
 	const char *output1 = "result0.mha";
 	const char *output2 = "result1.mha";
 
