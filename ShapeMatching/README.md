@@ -1,5 +1,8 @@
-## GetDiff.cpp
+## Shape Matching
 
-* 두 개의 이미지를 입력받는다.
-* 첫번째 이미지와 두번째 이미지가 다른 부분을 하얀색으로 나타낸다.
-
+* compile `make all`
+* run example `make run`
+* run `./test (arg1) (arg2) (arg3)`
+* arg1: previous image where image processing is complete
+* arg2: images that need shape matching
+* arg3: original image of arg2
