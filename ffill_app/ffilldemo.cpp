@@ -10,6 +10,10 @@
 using namespace cv;
 using namespace std;
 
+static void metahelp(){
+  cout << "Press key \"h\" in order to see instructions." << endl;
+}
+
 static void help()
 {
     cout << "\nThis program demonstrated the floodFill() function\n"
@@ -20,6 +24,7 @@ static void help()
             "\tESC - quit the program\n"
             "\tc - switch color/grayscale mode\n"
             "\tm - switch mask mode\n"
+            "\tn - move on to next image\n"
             "\tr - restore the original image\n"
             "\ts - use null-range floodfill\n"
             "\tf - use gradient floodfill with fixed(absolute) range\n"
@@ -119,7 +124,8 @@ int main( int argc, char** argv )
         parser.printMessage();
         return 0;
     }
-    help();
+    metahelp();
+    //help();
     image0.copyTo(image);
     cvtColor(image0, gray, COLOR_BGR2GRAY);
     mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
@@ -159,6 +165,9 @@ int main( int argc, char** argv )
                 isColor = true;
             }
             break;
+        case 'h':
+            help();
+            break;
         case 'm':
             if( useMask )
             {
@@ -175,7 +184,7 @@ int main( int argc, char** argv )
             break;
         case 'n': //added
             nextpic = true;
-            cout << "You pressed key n." << endl;
+            cout << "Next image: ";
             break;
         case 'r':
             cout << "Original image is restored\n";
@@ -206,7 +215,7 @@ int main( int argc, char** argv )
         }
 
       if(nextpic){
-        cout << "Breaking to move onto next ct image.." << endl;
+        // cout << "Breaking to move onto next ct image.." << endl;
         break;//break again from the outer loop and change the ct image.
       }
     }//end for(;;)
