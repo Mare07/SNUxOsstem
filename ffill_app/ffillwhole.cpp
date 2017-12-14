@@ -1,16 +1,6 @@
-#include "opencv2/imgproc.hpp"
-#include "opencv2/imgcodecs.hpp"
-#include "opencv2/videoio.hpp"
-#include "opencv2/highgui.hpp"
-
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include "../ShapeMatching/shapematch.h"
-#include "../ShapeMatching/shapematch.cpp"
-
-#define BEGIN 110 //was 86
-#define END 191
+#include "ffill.h"
+#define BEGIN 110 //can change
+#define END 191 //can change
 
 using namespace cv;
 using namespace std;
@@ -38,33 +28,51 @@ static void help()
             "\t8 - use 8-connectivity mode\n" << endl;
 }
 
-Mat prev, image0, image, gray, mask, colored, matched, orig;
-//Mat prev & matched & colored & orig for shape matching.
+Mat prev, image0, image, gray, mask, colored, matched;
+// Mat image0: each original ct image
+// Mat colored: floodfilled image1
+// Shape Matching uses Mat prev & matched & colored & image0.
+
 
 int ffillMode = 1;
-int loDiff = 20, upDiff = 20; 
-/* 
- After certain stage where the region is big enough and 
- clearly distinguishable from surroundings,
- color is filled to the extent when upDiff=30.
- But when the sinus gets mingled with other vacant spaces,
- floodfill doesn't detect correct region.
-*/
 int connectivity = 4;
 int isColor = true;
 bool useMask = false;
 int newMaskVal = 255;
+Point seedLeft;
+Point seedRight;
+static int seedCount = 0;
+int loDiff = 20, upDiff = 10; 
+/* Regarding upDiff... 
+ After certain stage where the region is big enough and 
+ clearly distinguishable from surroundings,
+ color is filled to the extent when upDiff=30.
+ But when the sinus gets mingled with other vacant spaces,
+ floodfill doesn't detect correct region. In this case, upDiff=10 yields better result.
+*/
 
 
-static void onMouse( int event, int x, int y, int, void* )
+
+
+static void onMouse( int event, int x, int y, int flags, void* param)
 {
     if( event != EVENT_LBUTTONDOWN )
         return;
-
+    seedCount += 1;
     Point seed = Point(x,y);
-   
-    cout << "You clicked " << seed << endl;
+    if(seedCount == 1){
+      seedLeft = seed;
+      colorFlood(seedLeft);
+    }
+    else if(seedCount == 2){
+      seedRight = seed;
+      colorFlood(seedRight);
+    }
 
+    //cout << "Seed Count: " << seedCount << endl;
+}
+
+static void colorFlood(Point seed){
     int lo = ffillMode == 0 ? 0 : loDiff;
     int up = ffillMode == 0 ? 0 : upDiff;
     int flags = connectivity + (newMaskVal << 8) +
@@ -97,17 +105,12 @@ static void onMouse( int event, int x, int y, int, void* )
                   Scalar(up, up, up), flags);
     }
     
-    //colored.create(dst.rows+2, dst.cols+2, CV_8UC1);
     dst.copyTo(colored);
-/*
-    Size s = dst.size();
-    cout << "dst: (" << s.height << ", " << s.width <<")" <<endl;    
-    Size s2 = orig.size();
-    cout << "orig: (" << s2.height << ", " << s2.width <<")" <<endl;
-    Size s3 = prev.size();
-    cout << "prev: (" << s3.height << ", " << s3.width <<")" <<endl;
-*/
-    imshow("image", colored);
+
+    
+    imshow("current", colored);
+    
+
     cout << area << " pixels were repainted\n";
 }
 
@@ -133,14 +136,16 @@ int main( int argc, char** argv )
     
 
     for(ctnum = BEGIN; ctnum < END; ctnum++){
-     bool nextpic = false;
-     ss.str(""); // flush the stream
-      //cout << "ctnum:" << ctnum << endl;
+      // Iterate CT images
+
+      bool nextpic = false;
+      ss.str(""); // flush the stream
+      // image file name format: ct.026.jpg
       ss << filedir << "ct." << setw(3) << setfill('0') << ctnum << ".jpg";
       filename = ss.str();
       cout << filename << endl;
     
-    image0 = imread(filename, 1);
+      image0 = imread(filename, 1);
 
     if( image0.empty() )
     {
@@ -148,32 +153,42 @@ int main( int argc, char** argv )
         parser.printMessage();
         return 0;
     }
+
     metahelp();
-    //help();
-    image0.copyTo(image);
+    
+    image0.copyTo(image); 
+
     cvtColor(image0, gray, COLOR_BGR2GRAY);
     mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
-    //orig.create(image0.rows+2, image0.cols+2, CV_8UC1);
-    image0.copyTo(orig);
-    namedWindow( "image", 0 );
-    createTrackbar( "lo_diff", "image", &loDiff, 255, 0 );
-    createTrackbar( "up_diff", "image", &upDiff, 255, 0 );
+    
+    namedWindow( "current", 0 );
+    createTrackbar( "lo_diff", "current", &loDiff, 255, 0 );
+    createTrackbar( "up_diff", "current", &upDiff, 255, 0 );
 
-    setMouseCallback( "image", onMouse, 0 );
+    // Only receive two clicks from the user
+    if(ctnum < BEGIN+2){      
+      setMouseCallback("current", onMouse, 0);
+    }
+    
     if(prev.empty()){
-       namedWindow("prevmask", 0);
+       namedWindow("prev", 0);
     }
     else{
-       imshow("prevmask", prev);
+       imshow("prev", prev);
     }
-    //why is prev initialized to black???? i stored mask into it.
+    
     namedWindow("matched", 0);
-    namedWindow("orig", 0);
-
+    
+    if(seedCount > 1){
+          colorFlood(seedLeft);
+          colorFlood(seedRight);
+    }
+   
     while(1)
     {
-        imshow("image", isColor ? image : gray);
-        imshow("orig", orig);
+        imshow("current", isColor ? image : gray);
+        
+       
 
         char c = (char)waitKey(0);
         if( c == 27 )//esc key
@@ -220,10 +235,9 @@ int main( int argc, char** argv )
         case 'n': //added
             nextpic = true;
             if(!prev.empty()){
-            matched = ShapeMatching(prev, colored, orig);
-            imshow("matched", matched);
+              matched = ShapeMatching(prev, colored, image0);
+              imshow("matched", matched);
             }
-            cout << "Next image: ";
             break;
         case 'r':
             cout << "Original image is restored\n";
@@ -254,14 +268,11 @@ int main( int argc, char** argv )
         }
 
       if(nextpic){
-        // cout << "Breaking to move onto next ct image.." << endl;
-       
         prev = image.clone();
-        mask = Scalar::all(0);      
-        
+        mask = Scalar::all(0);             
         break;//break again from the outer loop and change the ct image.
       }
-    }//end fwhile
+    }//end while
 
 
   if(wannaExit){
