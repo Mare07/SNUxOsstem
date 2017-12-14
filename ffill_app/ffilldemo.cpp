@@ -6,6 +6,8 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include "../ShapeMatching/shapematch.h"
+#include "../ShapeMatching/shapematch.cpp"
 
 using namespace cv;
 using namespace std;
@@ -33,7 +35,9 @@ static void help()
             "\t8 - use 8-connectivity mode\n" << endl;
 }
 
-Mat image0, image, gray, mask;
+Mat prev, image0, image, gray, mask, dummy, matched;
+//Mat prev & matched for shape matching.
+
 int ffillMode = 1;
 int loDiff = 20, upDiff = 20; 
 /* 
@@ -45,6 +49,7 @@ int connectivity = 4;
 int isColor = true;
 bool useMask = false;
 int newMaskVal = 255;
+
 
 static void onMouse( int event, int x, int y, int, void* )
 {
@@ -59,34 +64,34 @@ static void onMouse( int event, int x, int y, int, void* )
     int up = ffillMode == 0 ? 0 : upDiff;
     int flags = connectivity + (newMaskVal << 8) +
                 (ffillMode == 1 ? FLOODFILL_FIXED_RANGE : 0);
-   /* 
-    int b = (unsigned)theRNG() & 255;
-    int g = (unsigned)theRNG() & 255;
-    int r = (unsigned)theRNG() & 255;
-   */
+
+    // Region colored blue
     int b = 255;
     int g = 0;
     int r = 0;
  
-    Rect ccomp;
+    Rect ccomp; 
+    //new region was colored light gray : Scalar(r*0.299 + g*0.587 + b*0.114)
 
-    Scalar newVal = isColor ? Scalar(b, g, r) : Scalar(r*0.299 + g*0.587 + b*0.114);
+    Scalar newVal = isColor ? Scalar(b, g, r) : Scalar(r*0.299 + g*0.567 + b*0.114);
     Mat dst = isColor ? image : gray;
-    int area;
+    int area; // # of pixels repainted?
 
     if( useMask )
     {
-        threshold(mask, mask, 1, 128, THRESH_BINARY);
+        threshold(mask, mask, 1, 255, THRESH_BINARY); 
+        // 3rd arg was originally 128
         area = floodFill(dst, mask, seed, newVal, &ccomp, Scalar(lo, lo, lo),
                   Scalar(up, up, up), flags);
-        imshow( "mask", mask );
+        
+        imshow( "mask", mask ); // shows mask geting updated.
     }
     else
     {
         area = floodFill(dst, seed, newVal, &ccomp, Scalar(lo, lo, lo),
                   Scalar(up, up, up), flags);
     }
-
+    
     imshow("image", dst);
     cout << area << " pixels were repainted\n";
 }
@@ -110,6 +115,7 @@ int main( int argc, char** argv )
     ostringstream ss;
     string filename;
     bool wannaExit = false;
+    
 
     for(ctnum = 86; ctnum < 191; ctnum++){
      bool nextpic = false;
@@ -138,11 +144,20 @@ int main( int argc, char** argv )
     createTrackbar( "up_diff", "image", &upDiff, 255, 0 );
 
     setMouseCallback( "image", onMouse, 0 );
+    if(prev.empty()){
+       namedWindow("prevmask", 0);
+    }
+    else{
+       
+    }
+    //why is prev initialized to black???? i stored mask into it.
+
 
     while(1)
     {
         imshow("image", isColor ? image : gray);
-
+        if(!prev.empty())imshow("prevmask", prev);
+        
         char c = (char)waitKey(0);
         if( c == 27 )//esc key
         {
@@ -180,13 +195,14 @@ int main( int argc, char** argv )
             else
             {
                 namedWindow( "mask", 0 );
-                mask = Scalar::all(0);
+                mask = Scalar::all(0); // background black
                 imshow("mask", mask);
                 useMask = true;
             }
             break;
         case 'n': //added
             nextpic = true;
+            //prev = mask;
             cout << "Next image: ";
             break;
         case 'r':
@@ -219,6 +235,10 @@ int main( int argc, char** argv )
 
       if(nextpic){
         // cout << "Breaking to move onto next ct image.." << endl;
+        if(useMask){
+          prev = mask.clone();
+          mask = Scalar::all(0);      
+        }
         break;//break again from the outer loop and change the ct image.
       }
     }//end for(;;)
@@ -227,8 +247,6 @@ int main( int argc, char** argv )
   if(wannaExit){
     return 0; //exit now.
   }
-
 }
-
     return 0;
 }
