@@ -52,6 +52,9 @@ static void onMouse( int event, int x, int y, int, void* )
         return;
 
     Point seed = Point(x,y);
+   
+    cout << "You clicked " << seed << endl;
+
     int lo = ffillMode == 0 ? 0 : loDiff;
     int up = ffillMode == 0 ? 0 : upDiff;
     int flags = connectivity + (newMaskVal << 8) +
