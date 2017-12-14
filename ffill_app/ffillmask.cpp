@@ -9,6 +9,9 @@
 #include "../ShapeMatching/shapematch.h"
 #include "../ShapeMatching/shapematch.cpp"
 
+#define BEGIN 110 //was 86
+#define END 191
+
 using namespace cv;
 using namespace std;
 
@@ -35,8 +38,8 @@ static void help()
             "\t8 - use 8-connectivity mode\n" << endl;
 }
 
-Mat prev, image0, image, gray, mask, dummy, matched;
-//Mat prev & matched for shape matching.
+Mat prev, image0, image, gray, mask, matched, orig;
+//Mat prev & matched & orig for shape matching.
 
 int ffillMode = 1;
 int loDiff = 20, upDiff = 20; 
@@ -117,7 +120,7 @@ int main( int argc, char** argv )
     bool wannaExit = false;
     
 
-    for(ctnum = 86; ctnum < 191; ctnum++){
+    for(ctnum = BEGIN; ctnum < END; ctnum++){
      bool nextpic = false;
      ss.str(""); // flush the stream
       //cout << "ctnum:" << ctnum << endl;
@@ -138,7 +141,8 @@ int main( int argc, char** argv )
     image0.copyTo(image);
     cvtColor(image0, gray, COLOR_BGR2GRAY);
     mask.create(image0.rows+2, image0.cols+2, CV_8UC1);
-
+    orig.create(image0.rows+2, image0.cols+2, CV_8UC1);
+    image0.copyTo(orig);
     namedWindow( "image", 0 );
     createTrackbar( "lo_diff", "image", &loDiff, 255, 0 );
     createTrackbar( "up_diff", "image", &upDiff, 255, 0 );
@@ -148,16 +152,17 @@ int main( int argc, char** argv )
        namedWindow("prevmask", 0);
     }
     else{
-       
+       imshow("prevmask", prev);
     }
     //why is prev initialized to black???? i stored mask into it.
-
+    namedWindow("matched", 0);
+    namedWindow("orig", 0);
 
     while(1)
     {
         imshow("image", isColor ? image : gray);
-        if(!prev.empty())imshow("prevmask", prev);
-        
+        imshow("orig", orig);
+
         char c = (char)waitKey(0);
         if( c == 27 )//esc key
         {
@@ -202,7 +207,10 @@ int main( int argc, char** argv )
             break;
         case 'n': //added
             nextpic = true;
-            //prev = mask;
+            if(!prev.empty()){
+            matched = ShapeMatching(prev, mask, orig);
+            imshow("matched", matched);
+            }
             cout << "Next image: ";
             break;
         case 'r':
@@ -241,7 +249,7 @@ int main( int argc, char** argv )
         }
         break;//break again from the outer loop and change the ct image.
       }
-    }//end for(;;)
+    }//end fwhile
 
 
   if(wannaExit){

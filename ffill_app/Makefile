@@ -1,7 +1,7 @@
 CC = g++
 LIB = `pkg-config --cflags --libs opencv`
-TARGET = ffilldemo
-OBJECTS = ffilldemo.o
+TARGET = ffillwhole
+OBJECTS = ffillwhole.o
 DIRARG = ~/Pictures/ct_coronal/
 
 all: $(TARGET).cpp

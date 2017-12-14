@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char** argv) {	
   Mat src1 = imread(argv[1], 1);  // source 1
   Mat src2 = imread(argv[2], 1);  // source 2
-  Mat src3 = imread(argv[3], 1);  // result
+  Mat src3 = imread(argv[3], 1);  // original image
 
   namedWindow("src1", CV_WINDOW_AUTOSIZE);
   imshow("src1", src1);
@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
   imshow("src2", src2);
 	
   Mat result = ShapeMatching(src1, src2, src3);
-	
+  // result = source 2 changed, after comparing with source 1	
   namedWindow("result", CV_WINDOW_AUTOSIZE);
   imshow("result", result);
 
