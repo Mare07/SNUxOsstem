@@ -17,7 +17,7 @@ struct SeedPoint {
 	int image;
 	int file;
 	Point point;
-} seed_point[3];
+} seed_point[MAXNUM];
 
 static char* directory = NULL;
 
@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(box), button1, FALSE, FALSE, 0);
 	
 	/* label */
-  label = gtk_label_new("Directory: ...");
+  	label = gtk_label_new("Directory: ...");
  	gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
 
 	/* button2 */
