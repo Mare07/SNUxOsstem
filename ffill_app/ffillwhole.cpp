@@ -2,9 +2,10 @@
 //#define BEGIN 87 //can change
 //#define END 99
 #define BEGIN 100
-#define END 107
+#define END 191
 //#define BEGIN 108
-//#define END 191 //can change
+#define SIZE 20
+
 
 using namespace cv;
 using namespace std;
@@ -36,6 +37,8 @@ Mat prev, image0, image, gray, mask, colored, matched;
 // Mat image0: each original ct image
 // Mat colored: floodfilled image1
 // Shape Matching uses Mat prev & matched & colored & image0.
+Mat matched_mask, filled_mask;
+
 
 
 int ffillMode = 1;
@@ -55,6 +58,7 @@ int loDiff = 20, upDiff = 20; // upDiff = 10;
  floodfill doesn't detect correct region. In this case, upDiff=10 yields better result.
 */
 
+Scalar blue(255, 0, 0);
 
 
 
@@ -87,13 +91,18 @@ static void colorFlood(Point seed){
     // Region colored blue
     int b = 255;
     int g = 0;
-    int r = 0;
- 
+    int r = 0; 
+
+
     Rect ccomp; 
     //new region was colored light gray : Scalar(r*0.299 + g*0.587 + b*0.114)
 
-    Scalar newVal = isColor ? Scalar(b, g, r) : Scalar(r*0.299 + g*0.567 + b*0.114);
+    Scalar newVal = isColor ? blue : Scalar(r*0.299 + g*0.567 + b*0.114);
     Mat dst = isColor ? image : gray;
+    
+    matched_mask = Scalar::all(0);
+
+
     int area; // # of pixels repainted?
 
     if( useMask )
@@ -103,7 +112,8 @@ static void colorFlood(Point seed){
         area = floodFill(dst, mask, seed, newVal, &ccomp, Scalar(lo, lo, lo),
                   Scalar(up, up, up), flags);
         
-				imshow( "mask", mask ); // shows mask geting updated.
+	imshow( "mask", mask ); // shows mask geting updated.
+        
     }
     else
     {
@@ -113,11 +123,38 @@ static void colorFlood(Point seed){
     
     dst.copyTo(colored);
 
-    
+
+        
     imshow("current", colored);
     
 
     cout << area << " pixels were repainted\n";
+}
+
+Mat fillHoles(Mat holey){
+  Mat filled = holey.clone();
+
+
+  // CONTOUR ??
+  vector<vector<Point> > contours; 
+  vector<Vec4i> hierarchy; 
+  findContours(holey, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+  //cout << "contours size: " << contours.size() <<endl;
+
+  for(int i = 0; i<contours.size();i++){
+    drawContours(filled, contours, i, blue, 4, 8, hierarchy, 2);
+  }
+
+
+  // MORPHOLOGY - CLOSE
+  Mat elem;
+
+  for(int i = 0; i < SIZE; i++){ 
+    elem = getStructuringElement(MORPH_ELLIPSE, Size(2*i+1, 2*i+1), Point(i, i));
+    morphologyEx(holey, filled, MORPH_CLOSE, elem);    
+  }
+
+  return filled;
 }
 
 
@@ -184,7 +221,9 @@ int main( int argc, char** argv )
     }
     
     namedWindow("matched", 0);
-    
+    namedWindow("matched_mask", 0);    
+    namedWindow("filled_mask", 0);
+
     if(seedCount > 1){
           colorFlood(seedLeft);
           colorFlood(seedRight);
@@ -241,9 +280,18 @@ int main( int argc, char** argv )
         case 'n': //added
             nextpic = true;
             if(!prev.empty()){
+              if(useMask){
+
+              }
               matched = ShapeMatching(prev, colored, image0);
-							imshow("matched", matched);
-						}
+	      imshow("matched", matched);
+
+
+              inRange(matched, blue, blue, matched_mask);
+              filled_mask = fillHoles(matched_mask);
+              imshow("matched_mask", matched_mask);
+              imshow("filled_mask", filled_mask);
+	    }
             break;
         case 'r':
             cout << "Original image is restored\n";
@@ -275,8 +323,10 @@ int main( int argc, char** argv )
 
       if(nextpic){
         prev = image.clone();
-				if (!matched.empty()) prev = matched.clone();
-				mask = Scalar::all(0);             
+	if (!matched.empty()){
+          prev = matched.clone();
+        }
+	mask = Scalar::all(0);             
         break;//break again from the outer loop and change the ct image.
       }
     }//end while
