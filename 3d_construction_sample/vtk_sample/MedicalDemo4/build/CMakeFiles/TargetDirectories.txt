@@ -1,3 +1,0 @@
-/home/tigerlily/Desktop/vtk_sample/MedicalDemo4/build/CMakeFiles/edit_cache.dir
-/home/tigerlily/Desktop/vtk_sample/MedicalDemo4/build/CMakeFiles/MedicalDemo4.dir
-/home/tigerlily/Desktop/vtk_sample/MedicalDemo4/build/CMakeFiles/rebuild_cache.dir

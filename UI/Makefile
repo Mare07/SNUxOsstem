@@ -3,10 +3,14 @@ LIB1 = `pkg-config --cflags gtk+-3.0`
 LIB2 = `pkg-config --libs gtk+-3.0`
 LIB3 = `pkg-config --cflags --libs opencv`
 TARGET = ui
+FFILL = ffillwhole
 OBJECTS = ffillwhole.o shapematch.o
 
 all: $(TARGET).cpp $(OBJECTS)
 	$(CC) $(LIB1) -o $(TARGET) $(TARGET).cpp $(OBJECTS) $(LIB2) $(LIB3)
+
+ffill: $(FFILL).cpp $(OBJECTS)
+	$(CC) -o $(FFILL) $(FFILL).cpp $(OBJECTS) $(LIB3)
 
 run:
 	./$(TARGET)

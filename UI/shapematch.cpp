@@ -16,7 +16,7 @@ Mat ShapeMatching(Mat previous, Mat target, Mat original) {
 	  for (i = 0; i < diffImage.cols; ++i) {
       Vec3b pix = diffImage.at<Vec3b>(j, i);
 
-      if ((pix[0] >= 230) && (pix[1] <= 50) && (pix[2] <= 50)) {
+      if ((pix[0] >= 230) && (pix[1] >= 230) && (pix[2] >= 230)) {
         Vec3b originalPix = original.at<Vec3b>(j, i);
         result.at<Vec3b>(j, i) = originalPix;
       }

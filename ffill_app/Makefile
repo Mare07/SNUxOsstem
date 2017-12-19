@@ -2,7 +2,8 @@ CC = g++
 LIB = `pkg-config --cflags --libs opencv`
 #TARGET = ffillwhole
 TARGET = test
-OBJECTS = ffillwhole.o shapematch.o
+OBJECTS = ffillwhole.o shapematch.o 
+#OBJECTS = ffillwhole.o
 DIRARG = ~/Pictures/ct_coronal/
 
 all: $(TARGET).cpp $(OBJECTS)

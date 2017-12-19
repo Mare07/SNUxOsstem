@@ -1,0 +1,3 @@
+/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/build/CMakeFiles/edit_cache.dir
+/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/build/CMakeFiles/VolumeFromSlices.dir
+/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/build/CMakeFiles/rebuild_cache.dir

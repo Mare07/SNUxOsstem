@@ -7,7 +7,7 @@
 int main() {
 	Point left = Point(133, 131);
 	Point right = Point(250, 121);
-	string filedir = "/home/hyewon/share/ct_coronal/";
+	string filedir = "/home/tigerlily/Pictures/ct_coronal/";
 	int begin = 109;
 	int end = 120;
 

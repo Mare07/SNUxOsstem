@@ -27,7 +27,7 @@ int loDiff = 20, upDiff = 20; // upDiff = 10;
  floodfill doesn't detect correct region. In this case, upDiff=10 yields better result.
 */
 
-Scalar blue(255, 0, 0);
+Scalar blue(255, 255, 255);
 
 static void colorFlood(Point seed){
     int lo = ffillMode == 0 ? 0 : loDiff;
@@ -148,7 +148,8 @@ void floodfill(Point left, Point right, string filedir, int begin, int end)
       }
 
 			// make directory
-			int err = mkdir("./results", S_IRUSR | S_IWUSR | S_IXUSR);
+                        // was ./results
+			int err = mkdir("./what", S_IRUSR | S_IWUSR | S_IXUSR);
 			if ((err == -1) && (errno != EEXIST)) {
 				cout << "directory create error" << endl;
 				return;
