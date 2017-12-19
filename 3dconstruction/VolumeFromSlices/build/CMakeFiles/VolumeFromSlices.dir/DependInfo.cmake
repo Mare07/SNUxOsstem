@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/VolumeFromSlices.cxx" "/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/build/CMakeFiles/VolumeFromSlices.dir/VolumeFromSlices.cxx.o"
+  "/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/VolumeFromSlices.cxx" "/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/build/CMakeFiles/VolumeFromSlices.dir/VolumeFromSlices.cxx.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

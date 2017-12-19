@@ -3,6 +3,11 @@
  */
 
 #include "ui.h"
+//#include "../3dconstruction/MedicalDemo4/MedicalDemo4.cxx"
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 
 struct SeedPoint {
 	int image;
@@ -75,6 +80,18 @@ void show_vol_loc(GtkWidget *widget, gpointer data) {
 	char str[MAXCHAR];
 	sprintf(str, "[Volume]\nleft: %d\nright: %d", vol.x, vol.y);
 	gtk_label_set_text(GTK_LABEL((GtkWidget *)data), str);
+
+        //commargv[2] = { "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result.mha"};
+        pid_t pid = fork();
+        if(pid == 0){
+           cout << "is this reached?" << endl;
+           execl( "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result.mha", (const char *) 0);
+        }
+        else{
+           waitpid(pid, 0, 0);
+        }
+
+
 }
 
 void start_processing(GtkWidget *widget, gpointer data) {
@@ -316,7 +333,7 @@ int main(int argc, char *argv[]) {
 	gtk_box_pack_start(GTK_BOX(box), button3, FALSE, FALSE, 0);
 		
 	/* label2 */
-	label2 = gtk_label_new("[Volume]\nleft: ...\nright: ...");
+	label2 = gtk_label_new("[Sinus Volume]\nleft: ...\nright: ...");
 	gtk_box_pack_start(GTK_BOX(box), label2, FALSE, FALSE, 0);
 
 	/* button4 */

@@ -1,4 +1,51 @@
-// Derived from VTK/Examples/Cxx/Medical3.cxx
+// Derived from VTK/nclude <vtkSmartPointer.h>
+#include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
+#include <vtkRenderWindowInteractor.h>
+#include <vtkMetaImageReader.h>
+#include <vtkVolume.h>
+#include <vtkFixedPointVolumeRayCastMapper.h>
+#include <vtkVolumeProperty.h>
+#include <vtkColorTransferFunction.h>
+#include <vtkPiecewiseFunction.h>
+#include <vtkCamera.h>
+
+int visualize (int argc, char *argv[])
+//int main(int argc, char *argv[])
+{
+  if (argc < 2)
+  {
+    cout << "Usage: " << argv[0] << "file.mhd" << endl;
+    return EXIT_FAILURE;
+  }
+
+  // Create the renderer, the render window, and the interactor. The renderer
+  // draws into the render window, the interactor enables mouse- and
+  // keyboard-based interaction with the scene.
+  vtkSmartPointer<vtkRenderer> ren =
+    vtkSmartPointer<vtkRenderer>::New();
+  vtkSmartPointer<vtkRenderWindow> renWin =
+    vtkSmartPointer<vtkRenderWindow>::New();
+  renWin->AddRenderer(ren);
+  vtkSmartPointer<vtkRenderWindowInteractor> iren =
+    vtkSmartPointer<vtkRenderWindowInteractor>::New();
+  iren->SetRenderWindow(renWin);
+
+  // The following reader is used to read a series of 2D slices (images)
+  // that compose the volume. The slice dimensions are set, and the
+  // pixel spacing. The data Endianness must also be specified. The reader
+  // uses the FilePrefix in combination with the slice number to construct
+  // filenames using the format FilePref1ix.%d. (In this case the FilePrefix
+  // is the root name of the file: quarter.)
+  vtkSmartPointer<vtkMetaImageReader> reader =
+    vtkSmartPointer<vtkMetaImageReader>::New();
+  reader->SetFileName(argv[1]);
+
+  // The volume will be displayed by ray-cast alpha compositing.
+  // A ray-cast mapper is needed to do the ray-casting.
+  vtkSmartPointer<vtkFixedPointVolumeRayCastMapper> volumeMapper =
+    vtkSmartPointer<vtkFixedPointVolumeRayCastMapper>::New();
+  volumeMapper->SetInputConnExamples/Cxx/Medical3.cxx
 // This example reads a volume dataset and displays it via volume rendering.
 //
 
@@ -102,8 +149,8 @@ volumeColor->SetColorSpaceToRGB();
   vtkSmartPointer<vtkPiecewiseFunction> volumeGradientOpacity =
     vtkSmartPointer<vtkPiecewiseFunction>::New();
   volumeGradientOpacity->AddPoint(0,   0.0);
-  volumeGradientOpacity->AddPoint(90,  0.5);
-  volumeGradientOpacity->AddPoint(100, 0.5);
+  volumeGradientOpacity->AddPoint(80,  0.8);
+  volumeGradientOpacity->AddPoint(100, 0.9);
 
 
 
@@ -130,7 +177,7 @@ volumeColor->SetColorSpaceToRGB();
   volumeProperty->SetGradientOpacity(volumeGradientOpacity);
   volumeProperty->SetInterpolationTypeToLinear();
   volumeProperty->ShadeOn();
-  volumeProperty->SetAmbient(0.4);
+  volumeProperty->SetAmbient(0.6);
   volumeProperty->SetDiffuse(0.6);
   volumeProperty->SetSpecular(0.2);
 
@@ -150,17 +197,17 @@ volumeColor->SetColorSpaceToRGB();
   vtkCamera *camera = ren->GetActiveCamera();
   double *c = volume->GetCenter();
   camera->SetViewUp (0, 0, -1);
-  camera->SetPosition (c[0], c[1] - 400, c[2]);
+  camera->SetPosition (c[0], c[1] - 1000, c[2]);
   camera->SetFocalPoint (c[0], c[1], c[2]);
-  camera->Azimuth(30.0);
-  camera->Elevation(30.0);
+  camera->Azimuth(180.0);
+  camera->Elevation(90.0);
 
   // Set a background color for the renderer
   ren->SetBackground(.9, .9, .9);
 
   // Increase the size of the render window
   //renWin->SetSize(640, 480);
-  renWin->SetSize(320, 240);
+  renWin->SetSize(480, 360);
 
 
   // Interact with the data.

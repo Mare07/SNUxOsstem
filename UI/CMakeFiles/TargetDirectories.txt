@@ -1,3 +1,3 @@
-/home/hyewon/SNUxOsstem/UI/CMakeFiles/edit_cache.dir
-/home/hyewon/SNUxOsstem/UI/CMakeFiles/rebuild_cache.dir
-/home/hyewon/SNUxOsstem/UI/CMakeFiles/ui.dir
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/UI/CMakeFiles/edit_cache.dir
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/UI/CMakeFiles/ui.dir
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/UI/CMakeFiles/rebuild_cache.dir

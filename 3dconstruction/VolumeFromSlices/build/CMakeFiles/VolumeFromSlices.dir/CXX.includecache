@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/VolumeFromSlices.cxx
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/VolumeFromSlices.cxx
 itkImage.h
-/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/itkImage.h
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/itkImage.h
 itkImageSeriesReader.h
-/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/itkImageSeriesReader.h
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/itkImageSeriesReader.h
 itkImageFileWriter.h
-/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/itkImageFileWriter.h
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/itkImageFileWriter.h
 itkNumericSeriesFileNames.h
-/home/tigerlily/Desktop/vtk_sample/VolumeFromSlices/itkNumericSeriesFileNames.h
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/VolumeFromSlices/itkNumericSeriesFileNames.h
 
 /usr/include/ITK-4.9/ITKCommonExport.h
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/tigerlily/Desktop/vtk_sample/MedicalDemo4
+# Install script for directory: /home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/MedicalDemo4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/tigerlily/Desktop/vtk_sample/MedicalDemo4/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/MedicalDemo4/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

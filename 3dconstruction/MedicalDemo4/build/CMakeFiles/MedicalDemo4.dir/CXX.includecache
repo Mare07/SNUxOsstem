@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/tigerlily/Desktop/vtk_sample/MedicalDemo4/MedicalDemo4.cxx
+/home/tigerlily/Desktop/ctprocessing/SNUxOsstem/3dconstruction/MedicalDemo4/MedicalDemo4.cxx
 vtkSmartPointer.h
 -
 vtkRenderer.h
@@ -30,133 +30,119 @@ vtkPiecewiseFunction.h
 vtkCamera.h
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkABI.h
+/usr/include/vtk-6.2/vtkABI.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractMapper.h
+/usr/include/vtk-6.2/vtkAbstractMapper.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkAlgorithm.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAlgorithm.h
+/usr/include/vtk-6.2/vtkAlgorithm.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractMapper3D.h
+/usr/include/vtk-6.2/vtkAbstractMapper3D.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkAbstractMapper.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractMapper.h
+/usr/include/vtk-6.2/vtkAbstractMapper.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractVolumeMapper.h
+/usr/include/vtk-6.2/vtkAbstractVolumeMapper.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkAbstractMapper3D.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractMapper3D.h
+/usr/include/vtk-6.2/vtkAbstractMapper3D.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkActor.h
+/usr/include/vtk-6.2/vtkActor.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkProp3D.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp3D.h
+/usr/include/vtk-6.2/vtkProp3D.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkActorCollection.h
+/usr/include/vtk-6.2/vtkActorCollection.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkPropCollection.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkPropCollection.h
+/usr/include/vtk-6.2/vtkPropCollection.h
 vtkActor.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkActor.h
+/usr/include/vtk-6.2/vtkActor.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAlgorithm.h
+/usr/include/vtk-6.2/vtkAlgorithm.h
 vtkCommonExecutionModelModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonExecutionModelModule.h
+/usr/include/vtk-6.2/vtkCommonExecutionModelModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomic.h
+/usr/include/vtk-6.2/vtkAtomicInt.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
-vtkAtomicTypeConcepts.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomicTypeConcepts.h
-vtkConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
-vtkType.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkType.h
-cstddef
--
+/usr/include/vtk-6.2/vtkSystemIncludes.h
+vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
 libkern/OSAtomic.h
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomicTypeConcepts.h
-limits
--
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomicTypes.h
-vtkAtomic.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomic.h
-vtkType.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkType.h
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAutoInit.h
+/usr/include/vtk-6.2/vtkAutoInit.h
 vtkDebugLeaksManager.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkDebugLeaksManager.h
+/usr/include/vtk-6.2/vtkDebugLeaksManager.h
 vtkTimeStamp.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkTimeStamp.h
+/usr/include/vtk-6.2/vtkTimeStamp.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCamera.h
+/usr/include/vtk-6.2/vtkCamera.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
-vtkRect.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRect.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCollection.h
+/usr/include/vtk-6.2/vtkCollection.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkColorTransferFunction.h
+/usr/include/vtk-6.2/vtkColorTransferFunction.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkScalarsToColors.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkScalarsToColors.h
+/usr/include/vtk-6.2/vtkScalarsToColors.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonDataModelModule.h
+/usr/include/vtk-6.2/vtkCommonDataModelModule.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonExecutionModelModule.h
+/usr/include/vtk-6.2/vtkCommonExecutionModelModule.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
 vtkVersionMacros.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVersionMacros.h
+/usr/include/vtk-6.2/vtkVersionMacros.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkDataObject.h
+/usr/include/vtk-6.2/vtkDataObject.h
 vtkCommonDataModelModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonDataModelModule.h
+/usr/include/vtk-6.2/vtkCommonDataModelModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkDebugLeaksManager.h
+/usr/include/vtk-6.2/vtkDebugLeaksManager.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkFixedPointVolumeRayCastMapper.h
+/usr/include/vtk-6.2/vtkFixedPointVolumeRayCastMapper.h
 vtkRenderingVolumeModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingVolumeModule.h
+/usr/include/vtk-6.2/vtkRenderingVolumeModule.h
 vtkVolumeMapper.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolumeMapper.h
+/usr/include/vtk-6.2/vtkVolumeMapper.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOImageModule.h
+/usr/include/vtk-6.2/vtkIOImageModule.h
 vtkAutoInit.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAutoInit.h
+/usr/include/vtk-6.2/vtkAutoInit.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOStream.h
+/usr/include/vtk-6.2/vtkIOStream.h
+vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
+vtkWin32Header.h
+/usr/include/vtk-6.2/vtkWin32Header.h
 iostream
 -
 fstream
@@ -164,191 +150,169 @@ fstream
 iomanip
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOStreamFwd.h
+/usr/include/vtk-6.2/vtkIOStreamFwd.h
 vtkConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
 iosfwd
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkImageAlgorithm.h
+/usr/include/vtk-6.2/vtkImageAlgorithm.h
 vtkCommonExecutionModelModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonExecutionModelModule.h
+/usr/include/vtk-6.2/vtkCommonExecutionModelModule.h
 vtkAlgorithm.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAlgorithm.h
+/usr/include/vtk-6.2/vtkAlgorithm.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkImageReader2.h
+/usr/include/vtk-6.2/vtkImageReader2.h
 vtkIOImageModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOImageModule.h
+/usr/include/vtk-6.2/vtkIOImageModule.h
 vtkImageAlgorithm.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkImageAlgorithm.h
+/usr/include/vtk-6.2/vtkImageAlgorithm.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIndent.h
+/usr/include/vtk-6.2/vtkIndent.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkMath.h
-vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
-vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
-vtkMathConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkMathConfigure.h
-cassert
--
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkMathConfigure.h
-cmath
--
-float.h
--
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkMetaImageReader.h
+/usr/include/vtk-6.2/vtkMetaImageReader.h
 vtkIOImageModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOImageModule.h
+/usr/include/vtk-6.2/vtkIOImageModule.h
 vtkImageReader2.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkImageReader2.h
+/usr/include/vtk-6.2/vtkImageReader2.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkOStrStreamWrapper.h
+/usr/include/vtk-6.2/vtkOStrStreamWrapper.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkOStreamWrapper.h
+/usr/include/vtk-6.2/vtkOStreamWrapper.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkObjectBase.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObjectBase.h
+/usr/include/vtk-6.2/vtkObjectBase.h
 vtkSetGet.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSetGet.h
+/usr/include/vtk-6.2/vtkSetGet.h
 vtkTimeStamp.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkTimeStamp.h
+/usr/include/vtk-6.2/vtkTimeStamp.h
 vtkWeakPointerBase.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWeakPointerBase.h
+/usr/include/vtk-6.2/vtkWeakPointerBase.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObjectBase.h
+/usr/include/vtk-6.2/vtkObjectBase.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
+vtkAtomicInt.h
+/usr/include/vtk-6.2/vtkAtomicInt.h
 vtkIndent.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIndent.h
+/usr/include/vtk-6.2/vtkIndent.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
-vtkAtomicTypes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAtomicTypes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkPiecewiseFunction.h
+/usr/include/vtk-6.2/vtkPiecewiseFunction.h
 vtkCommonDataModelModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonDataModelModule.h
+/usr/include/vtk-6.2/vtkCommonDataModelModule.h
 vtkDataObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkDataObject.h
+/usr/include/vtk-6.2/vtkDataObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp.h
+/usr/include/vtk-6.2/vtkProp.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp3D.h
+/usr/include/vtk-6.2/vtkProp3D.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkProp.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp.h
+/usr/include/vtk-6.2/vtkProp.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkPropCollection.h
+/usr/include/vtk-6.2/vtkPropCollection.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkCollection.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCollection.h
+/usr/include/vtk-6.2/vtkCollection.h
 vtkProp.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp.h
+/usr/include/vtk-6.2/vtkProp.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRect.h
-vtkVector.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVector.h
-vtkMath.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkMath.h
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderWindow.h
+/usr/include/vtk-6.2/vtkRenderWindow.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkWindow.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWindow.h
+/usr/include/vtk-6.2/vtkWindow.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderWindowInteractor.h
+/usr/include/vtk-6.2/vtkRenderWindowInteractor.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderer.h
+/usr/include/vtk-6.2/vtkRenderer.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkViewport.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkViewport.h
+/usr/include/vtk-6.2/vtkViewport.h
 vtkVolumeCollection.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolumeCollection.h
+/usr/include/vtk-6.2/vtkVolumeCollection.h
 vtkActorCollection.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkActorCollection.h
+/usr/include/vtk-6.2/vtkActorCollection.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkAutoInit.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAutoInit.h
+/usr/include/vtk-6.2/vtkAutoInit.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingVolumeModule.h
+/usr/include/vtk-6.2/vtkRenderingVolumeModule.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkAutoInit.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAutoInit.h
+/usr/include/vtk-6.2/vtkAutoInit.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkScalarsToColors.h
+/usr/include/vtk-6.2/vtkScalarsToColors.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkVariant.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVariant.h
+/usr/include/vtk-6.2/vtkVariant.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSetGet.h
+/usr/include/vtk-6.2/vtkSetGet.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 math.h
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSmartPointer.h
+/usr/include/vtk-6.2/vtkSmartPointer.h
 vtkSmartPointerBase.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSmartPointerBase.h
+/usr/include/vtk-6.2/vtkSmartPointerBase.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSmartPointerBase.h
+/usr/include/vtk-6.2/vtkSmartPointerBase.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkObjectBase.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObjectBase.h
+/usr/include/vtk-6.2/vtkObjectBase.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkStdString.h
+/usr/include/vtk-6.2/vtkStdString.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 string
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 vtkWin32Header.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWin32Header.h
+/usr/include/vtk-6.2/vtkWin32Header.h
 vtkIOStreamFwd.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOStreamFwd.h
+/usr/include/vtk-6.2/vtkIOStreamFwd.h
 vtkIOStream.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOStream.h
+/usr/include/vtk-6.2/vtkIOStream.h
 vtkType.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkType.h
+/usr/include/vtk-6.2/vtkType.h
 vtkOStreamWrapper.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkOStreamWrapper.h
+/usr/include/vtk-6.2/vtkOStreamWrapper.h
 vtkOStrStreamWrapper.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkOStrStreamWrapper.h
+/usr/include/vtk-6.2/vtkOStrStreamWrapper.h
 stdio.h
 -
 stdlib.h
@@ -360,117 +324,97 @@ mem.h
 search.h
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkTimeStamp.h
+/usr/include/vtk-6.2/vtkTimeStamp.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkTuple.h
-vtkIOStream.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkIOStream.h
-vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
-cassert
--
-cstdlib
--
-cmath
--
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkType.h
+/usr/include/vtk-6.2/vtkType.h
 vtkConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkUnicodeString.h
+/usr/include/vtk-6.2/vtkUnicodeString.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 string
 -
 vector
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVariant.h
+/usr/include/vtk-6.2/vtkVariant.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkType.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkType.h
+/usr/include/vtk-6.2/vtkType.h
 vtkSystemIncludes.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSystemIncludes.h
+/usr/include/vtk-6.2/vtkSystemIncludes.h
 vtkSetGet.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkSetGet.h
+/usr/include/vtk-6.2/vtkSetGet.h
 vtkStdString.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkStdString.h
+/usr/include/vtk-6.2/vtkStdString.h
 vtkUnicodeString.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkUnicodeString.h
+/usr/include/vtk-6.2/vtkUnicodeString.h
 vtkVariantInlineOperators.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVariantInlineOperators.h
+/usr/include/vtk-6.2/vtkVariantInlineOperators.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVariantInlineOperators.h
+/usr/include/vtk-6.2/vtkVariantInlineOperators.h
 climits
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVector.h
-vtkTuple.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkTuple.h
-vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
-cmath
--
+/usr/include/vtk-6.2/vtkVersionMacros.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVersionMacros.h
-
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkViewport.h
+/usr/include/vtk-6.2/vtkViewport.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolume.h
+/usr/include/vtk-6.2/vtkVolume.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkProp3D.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkProp3D.h
+/usr/include/vtk-6.2/vtkProp3D.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolumeCollection.h
+/usr/include/vtk-6.2/vtkVolumeCollection.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkPropCollection.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkPropCollection.h
+/usr/include/vtk-6.2/vtkPropCollection.h
 vtkVolume.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolume.h
+/usr/include/vtk-6.2/vtkVolume.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolumeMapper.h
+/usr/include/vtk-6.2/vtkVolumeMapper.h
 vtkRenderingVolumeModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingVolumeModule.h
+/usr/include/vtk-6.2/vtkRenderingVolumeModule.h
 vtkAbstractVolumeMapper.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkAbstractVolumeMapper.h
+/usr/include/vtk-6.2/vtkAbstractVolumeMapper.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkVolumeProperty.h
+/usr/include/vtk-6.2/vtkVolumeProperty.h
 vtkRenderingCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWeakPointerBase.h
+/usr/include/vtk-6.2/vtkWeakPointerBase.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkObjectBase.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObjectBase.h
+/usr/include/vtk-6.2/vtkObjectBase.h
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWin32Header.h
+/usr/include/vtk-6.2/vtkWin32Header.h
 vtkConfigure.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkConfigure.h
+/usr/include/vtk-6.2/vtkConfigure.h
 vtkABI.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkABI.h
+/usr/include/vtk-6.2/vtkABI.h
 windows.h
 -
 
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkWindow.h
+/usr/include/vtk-6.2/vtkWindow.h
 vtkCommonCoreModule.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
 vtkObject.h
-/home/tigerlily/miniconda3/include/vtk-7.0/vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 

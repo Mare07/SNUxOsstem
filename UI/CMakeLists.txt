@@ -6,8 +6,11 @@ project(ImageProcessing)
 find_package(OpenCV REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(ITK REQUIRED)
-
 include(${ITK_USE_FILE})
+
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+
 if (ITKVtkGlue_LOADED)
 	find_package(VTK REQUIRED)
 	include(${VTK_USE_FILE})
@@ -26,7 +29,7 @@ set(OBJECTS ffillwhole.cpp shapematch.cpp)
 add_executable(ui ui.cpp ${OBJECTS})
 
 if( "${ITK_VERSION_MAJOR}" LESS 4 )
-  target_link_libraries(ui ITKReview ${ITK_LIBRARIES} ${OpenCV_LIBS} ${GTK3_LIBRARIES})
+  target_link_libraries(ui ITKReview ${ITK_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} ${GTK3_LIBRARIES})
 else( "${ITK_VERSION_MAJOR}" LESS 4 )
-  target_link_libraries(ui ${ITK_LIBRARIES} ${OpenCV_LIBS} ${GTK3_LIBRARIES})
+  target_link_libraries(ui ${ITK_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} ${GTK3_LIBRARIES})
 endif( "${ITK_VERSION_MAJOR}" LESS 4 )
