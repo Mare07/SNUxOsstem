@@ -9,6 +9,11 @@
 #include <vtkColorTransferFunction.h>
 #include <vtkPiecewiseFunction.h>
 #include <vtkCamera.h>
+/*
+ * Do not use the modified version to render original mha file. 
+ * It gets way smaller and thicker.
+ */
+
 
 int main (int argc, char *argv[])
 {
@@ -17,6 +22,9 @@ int main (int argc, char *argv[])
     cout << "Usage: " << argv[0] << "file.mhd" << endl;
     return EXIT_FAILURE;
   }
+
+  int mode = 1; //Processed Version mha
+
 
   // Create the renderer, the render window, and the interactor. The renderer
   // draws into the render window, the interactor enables mouse- and
@@ -39,6 +47,10 @@ int main (int argc, char *argv[])
   vtkSmartPointer<vtkMetaImageReader> reader =
     vtkSmartPointer<vtkMetaImageReader>::New();
   reader->SetFileName(argv[1]);
+  std::string inputfilename = argv[1];
+  if(inputfilename.find("original") != std::string::npos){
+    mode = 0;
+  }
 
   // The volume will be displayed by ray-cast alpha compositing.
   // A ray-cast mapper is needed to do the ray-casting.
@@ -52,20 +64,20 @@ int main (int argc, char *argv[])
   // and another color for bone (1150 and over).
   vtkSmartPointer<vtkColorTransferFunction>volumeColor =
     vtkSmartPointer<vtkColorTransferFunction>::New();
-/* 
-volumeColor->SetColorSpaceToRGB();
-  volumeColor->AddRGBPoint(0,    1.0, 0.0, 0.0);
-  volumeColor->AddRGBPoint(500,  0.0, 0.0, 0.0);
-  volumeColor->AddRGBPoint(1000, 1.0, 0.5, 0.3);
-  volumeColor->AddRGBPoint(1150, 1.0, 1.0, 0.9);
-*/
  
-  volumeColor->AddRGBPoint(0,    0.0, 0.0, 1.0);
-  volumeColor->AddRGBPoint(50,  0.0, 0.0, 0.9);
-  volumeColor->AddRGBPoint(100,  0.0, 0.0, 0.0);
-  volumeColor->AddRGBPoint(1000, 9.0, 0.0, 0.0);
-  volumeColor->AddRGBPoint(2000, 1.0, 0.0, 0.0);
-
+  if(mode==0){
+    volumeColor->SetColorSpaceToRGB();
+    volumeColor->AddRGBPoint(0,    1.0, 0.0, 0.0);
+    volumeColor->AddRGBPoint(500,  0.5, 0.5, 0.3);
+    volumeColor->AddRGBPoint(1000, 1.0, 0.5, 0.3);
+    volumeColor->AddRGBPoint(1150, 1.0, 1.0, 0.9);
+  }
+  else{
+    volumeColor->AddRGBPoint(0,    0.0, 0.0, 1.0);
+    volumeColor->AddRGBPoint(50,  0.0, 0.0, 0.9);
+    volumeColor->AddRGBPoint(100,  0.9, 0.0, 0.0);
+    volumeColor->AddRGBPoint(2000, 1.0, 0.0, 0.0);
+  }
   /* White parts (bone & sinus) => colored red */
 
 
@@ -75,18 +87,20 @@ volumeColor->SetColorSpaceToRGB();
   vtkSmartPointer<vtkPiecewiseFunction> volumeScalarOpacity =
     vtkSmartPointer<vtkPiecewiseFunction>::New();
 
-  volumeScalarOpacity->AddPoint(0,    0.1);
-  volumeScalarOpacity->AddPoint(10,  0.15);
-  volumeScalarOpacity->AddPoint(1000, 0.9);
-  volumeScalarOpacity->AddPoint(1150, 0.95);
+  if(mode==0){
+    volumeScalarOpacity->AddPoint(0,    0.0);
+    volumeScalarOpacity->AddPoint(500,  0.15);
+    volumeScalarOpacity->AddPoint(1000, 0.15);
+    volumeScalarOpacity->AddPoint(1150, 0.35);
+  }
+  else{
+    volumeScalarOpacity->AddPoint(0,    0.1);
+    volumeScalarOpacity->AddPoint(10,  0.15);
+    volumeScalarOpacity->AddPoint(500, 0.9); //=>if set to 1000, opacity of red increases
+    volumeScalarOpacity->AddPoint(1150, 0.95);
+  }
 
 
-/*
-  volumeScalarOpacity->AddPoint(0,    0.0);
-  volumeScalarOpacity->AddPoint(500,  0.15);
-  volumeScalarOpacity->AddPoint(1000, 0.15);
-  volumeScalarOpacity->AddPoint(1150, 0.85);
-*/
 
 
 
@@ -97,17 +111,20 @@ volumeColor->SetColorSpaceToRGB();
   // For most medical data, the unit distance is 1mm.
   vtkSmartPointer<vtkPiecewiseFunction> volumeGradientOpacity =
     vtkSmartPointer<vtkPiecewiseFunction>::New();
-  volumeGradientOpacity->AddPoint(0,   0.0);
-  volumeGradientOpacity->AddPoint(80,  0.8);
-  volumeGradientOpacity->AddPoint(100, 0.9);
+
+  if(mode == 0) {
+    volumeGradientOpacity->AddPoint(0,   0.0);
+    volumeGradientOpacity->AddPoint(90,  0.5);
+    volumeGradientOpacity->AddPoint(100, 1.0);
+  }
+  else{
+    volumeGradientOpacity->AddPoint(0,   0.0);
+    volumeGradientOpacity->AddPoint(80,  0.8);
+    volumeGradientOpacity->AddPoint(100, 0.9);
+  }
 
 
 
-/*
-  volumeGradientOpacity->AddPoint(0,   0.0);
-  volumeGradientOpacity->AddPoint(90,  0.5);
-  volumeGradientOpacity->AddPoint(100, 1.0);
-*/
   // The VolumeProperty attaches the color and opacity functions to the
   // volume, and sets other volume properties.  The interpolation should
   // be set to linear to do a high-quality rendering.  The ShadeOn option
@@ -126,7 +143,12 @@ volumeColor->SetColorSpaceToRGB();
   volumeProperty->SetGradientOpacity(volumeGradientOpacity);
   volumeProperty->SetInterpolationTypeToLinear();
   volumeProperty->ShadeOn();
-  volumeProperty->SetAmbient(0.6);
+  if(mode ==0){
+    volumeProperty->SetAmbient(0.4);
+  }
+  else {
+    volumeProperty->SetAmbient(0.6);
+  }
   volumeProperty->SetDiffuse(0.6);
   volumeProperty->SetSpecular(0.2);
 
@@ -145,12 +167,22 @@ volumeColor->SetColorSpaceToRGB();
   // patient's left (which is our right).
   vtkCamera *camera = ren->GetActiveCamera();
   double *c = volume->GetCenter();
+
+
+  if(mode == 0){
+  camera->SetViewUp (0, 0, 1);
+  camera->SetPosition (c[0], c[1] - 400, c[2]);
+  camera->SetFocalPoint (c[0], c[1], c[2]);
+  camera->Azimuth(1);
+  camera->Elevation(0.0); 
+  }
+  else{
   camera->SetViewUp (0, -1, 0);
   camera->SetPosition (c[0], c[1] - 1000, c[2]);
   camera->SetFocalPoint (c[0], c[1], c[2]);
   camera->Azimuth(180);
   camera->Elevation(90.0);
-
+  }
   // Set a background color for the renderer
   ren->SetBackground(.9, .9, .9);
 
