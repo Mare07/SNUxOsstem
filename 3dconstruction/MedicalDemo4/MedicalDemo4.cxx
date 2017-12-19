@@ -1,54 +1,3 @@
-// Derived from VTK/nclude <vtkSmartPointer.h>
-#include <vtkRenderer.h>
-#include <vtkRenderWindow.h>
-#include <vtkRenderWindowInteractor.h>
-#include <vtkMetaImageReader.h>
-#include <vtkVolume.h>
-#include <vtkFixedPointVolumeRayCastMapper.h>
-#include <vtkVolumeProperty.h>
-#include <vtkColorTransferFunction.h>
-#include <vtkPiecewiseFunction.h>
-#include <vtkCamera.h>
-
-int visualize (int argc, char *argv[])
-//int main(int argc, char *argv[])
-{
-  if (argc < 2)
-  {
-    cout << "Usage: " << argv[0] << "file.mhd" << endl;
-    return EXIT_FAILURE;
-  }
-
-  // Create the renderer, the render window, and the interactor. The renderer
-  // draws into the render window, the interactor enables mouse- and
-  // keyboard-based interaction with the scene.
-  vtkSmartPointer<vtkRenderer> ren =
-    vtkSmartPointer<vtkRenderer>::New();
-  vtkSmartPointer<vtkRenderWindow> renWin =
-    vtkSmartPointer<vtkRenderWindow>::New();
-  renWin->AddRenderer(ren);
-  vtkSmartPointer<vtkRenderWindowInteractor> iren =
-    vtkSmartPointer<vtkRenderWindowInteractor>::New();
-  iren->SetRenderWindow(renWin);
-
-  // The following reader is used to read a series of 2D slices (images)
-  // that compose the volume. The slice dimensions are set, and the
-  // pixel spacing. The data Endianness must also be specified. The reader
-  // uses the FilePrefix in combination with the slice number to construct
-  // filenames using the format FilePref1ix.%d. (In this case the FilePrefix
-  // is the root name of the file: quarter.)
-  vtkSmartPointer<vtkMetaImageReader> reader =
-    vtkSmartPointer<vtkMetaImageReader>::New();
-  reader->SetFileName(argv[1]);
-
-  // The volume will be displayed by ray-cast alpha compositing.
-  // A ray-cast mapper is needed to do the ray-casting.
-  vtkSmartPointer<vtkFixedPointVolumeRayCastMapper> volumeMapper =
-    vtkSmartPointer<vtkFixedPointVolumeRayCastMapper>::New();
-  volumeMapper->SetInputConnExamples/Cxx/Medical3.cxx
-// This example reads a volume dataset and displays it via volume rendering.
-//
-
 #include <vtkSmartPointer.h>
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
@@ -128,7 +77,7 @@ volumeColor->SetColorSpaceToRGB();
 
   volumeScalarOpacity->AddPoint(0,    0.1);
   volumeScalarOpacity->AddPoint(10,  0.15);
-  volumeScalarOpacity->AddPoint(1000, 0.15);
+  volumeScalarOpacity->AddPoint(1000, 0.9);
   volumeScalarOpacity->AddPoint(1150, 0.95);
 
 
@@ -196,10 +145,10 @@ volumeColor->SetColorSpaceToRGB();
   // patient's left (which is our right).
   vtkCamera *camera = ren->GetActiveCamera();
   double *c = volume->GetCenter();
-  camera->SetViewUp (0, 0, -1);
+  camera->SetViewUp (0, -1, 0);
   camera->SetPosition (c[0], c[1] - 1000, c[2]);
   camera->SetFocalPoint (c[0], c[1], c[2]);
-  camera->Azimuth(180.0);
+  camera->Azimuth(180);
   camera->Elevation(90.0);
 
   // Set a background color for the renderer
@@ -215,3 +164,4 @@ volumeColor->SetColorSpaceToRGB();
 
   return EXIT_SUCCESS;
 }
+

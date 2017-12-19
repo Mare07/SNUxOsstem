@@ -81,14 +81,13 @@ void show_vol_loc(GtkWidget *widget, gpointer data) {
 	sprintf(str, "[Volume]\nleft: %d\nright: %d", vol.x, vol.y);
 	gtk_label_set_text(GTK_LABEL((GtkWidget *)data), str);
 
-        //commargv[2] = { "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result.mha"};
+        
         pid_t pid = fork();
         if(pid == 0){
-           cout << "is this reached?" << endl;
-           execl( "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result.mha", (const char *) 0);
+            execl( "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "../3dconstruction/MedicalDemo4/build/MedicalDemo4", "result.mha", (const char *) 0);
         }
         else{
-           waitpid(pid, 0, 0);
+            waitpid(pid, 0, 0);
         }
 
 
